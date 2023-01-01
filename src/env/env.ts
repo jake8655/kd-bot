@@ -12,7 +12,8 @@ export const env = envsafe({
     devDefault: "root",
   }),
   DATABASE_PASSWORD: str({
-    devDefault: "",
+    allowEmpty: true,
+    devDefault: "password",
   }),
   DATABASE_NAME: str({
     devDefault: "fivem",
