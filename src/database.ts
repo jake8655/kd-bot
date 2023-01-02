@@ -21,8 +21,6 @@ const connect = () => {
       console.error('error connecting: ' + err.stack);
       return;
     }
-
-    console.log('connected as id ' + connection.threadId);
   });
 
   return connection;
@@ -50,8 +48,8 @@ export const safeQuery = async <T extends z.ZodRawShape>(
 export const getLeaderboard = async () => {
   const query = `select
     cast(ratio as decimal(10, 2)) as rounded_ratio,
-    kd.*, users.name from kd
-    left join users on kd.identifier = users.identifier
+    kd_ratio.*, users.name from kd_ratio
+    left join users on kd_ratio.identifier = users.identifier
     order by ${ORDER_BY} desc limit ${TOP}`;
 
   const data = await safeQuery(
