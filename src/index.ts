@@ -83,19 +83,17 @@ const sendMessage = async () => {
         iconURL: 'https://i.imgur.com/4ZQZ9Zm.png',
       })
       .setDescription(
-        `Itt a legtöbb öléssel rendelkező ${
-          leaderboard.length
+        `Itt a legtöbb öléssel rendelkező ${leaderboard.length
         } játékos!\n\n**Összes ölés:** ${leaderboard.reduce(
           (prev, { kills }) => prev + kills,
           0
         )}\n**Összes halál:** ${leaderboard.reduce(
           (prev, { deaths }) => prev + deaths,
           0
-        )}\n**Összes ölés/halál:** ${
-          roundToTwo(
-            leaderboard.reduce((prev, { kills }) => prev + kills, 0) /
-              leaderboard.reduce((prev, { deaths }) => prev + deaths, 0)
-          ) || 0
+        )}\n**Összes ölés/halál:** ${roundToTwo(
+          leaderboard.reduce((prev, { kills }) => prev + kills, 0) /
+          leaderboard.reduce((prev, { deaths }) => prev + deaths, 0)
+        ) || 0
         }\n**${'-'.repeat(80)}**`
       )
       .addFields(

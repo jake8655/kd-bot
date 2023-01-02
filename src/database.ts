@@ -3,6 +3,9 @@ import util from 'util';
 import { z } from 'zod';
 import { env } from './env/env';
 
+const TOP = 50;
+const ORDER_BY = 'rounded_ratio';
+
 const connect = () => {
   const connection = mysql.createConnection({
     socketPath: '/tmp/mysql.sock',
@@ -45,8 +48,6 @@ export const safeQuery = async <T extends z.ZodRawShape>(
 };
 
 export const getLeaderboard = async () => {
-  const TOP = 50;
-  const ORDER_BY = 'rounded_ratio';
   const query = `select
     cast(ratio as decimal(10, 2)) as rounded_ratio,
     kd.*, users.name from kd
