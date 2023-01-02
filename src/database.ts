@@ -27,16 +27,16 @@ const connect = () => {
 
 const connection = connect();
 
-const queryDb = util.promisify(connection.query).bind(connection);
+export const queryDb = util.promisify(connection.query).bind(connection);
 
-const safeQuery = async <T extends z.ZodRawShape>(
+export const safeQuery = async <T extends z.ZodRawShape>(
   query: string,
-  schema: z.ZodArray<z.ZodObject<T>> | z.ZodObject<T>
+  schema: z.ZodObject<T>
 ) => {
   const res = await queryDb(query);
 
   try {
-    const [row] = z.tuple([schema]).parse(res);
+    const row = z.array(schema).parse(res);
     return row;
   } catch {
     console.warn(`❌ Parsing query failed: ${query}`);
@@ -47,22 +47,30 @@ const safeQuery = async <T extends z.ZodRawShape>(
 export const getLeaderboard = async () => {
   const TOP = 50;
   const ORDER_BY = 'rounded_ratio';
-  const query = `select cast(ratio as decimal(10, 2)) as rounded_ratio, kd.* from kd order by ${ORDER_BY} desc limit ${TOP}`;
+  const query = `select
+    cast(ratio as decimal(10, 2)) as rounded_ratio,
+    kd.*, users.name from kd
+    left join users on kd.identifier = users.identifier
+    order by ${ORDER_BY} desc limit ${TOP}`;
 
-  const schema = z.array(
+  const data = await safeQuery(
+    query,
     z.object({
-      identifier: z.string(),
       kills: z.number(),
       deaths: z.number(),
       rounded_ratio: z.number(),
+      name: z
+        .string()
+        .nullish()
+        .transform(name => {
+          if (!name) return 'Anonymous';
+          return name.trim();
+        }),
     })
   );
 
-  const data = await safeQuery(query, schema);
-  if ('length' in data) {
-    // Return new array with ratio instead of rounded_ratio
-    return data.map(({ rounded_ratio }) => )
-  }
-
-  return { ...data, ratio: data.rounded_ratio }
+  return data.map(({ rounded_ratio, ...rest }) => ({
+    ratio: rounded_ratio,
+    ...rest,
+  }));
 };

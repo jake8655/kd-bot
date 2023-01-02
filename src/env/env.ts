@@ -1,22 +1,26 @@
-import { envsafe, str } from "envsafe";
+import { envsafe, num, str } from 'envsafe';
 
 export const env = envsafe({
   NODE_ENV: str({
-    devDefault: "development",
-    choices: ["development", "test", "production"],
+    devDefault: 'development',
+    choices: ['development', 'test', 'production'],
   }),
   DATABASE_HOST: str({
-    devDefault: "localhost",
+    devDefault: 'localhost',
   }),
   DATABASE_USER: str({
-    devDefault: "root",
+    devDefault: 'root',
   }),
   DATABASE_PASSWORD: str({
     allowEmpty: true,
-    devDefault: "password",
+    devDefault: 'password',
   }),
   DATABASE_NAME: str({
-    devDefault: "fivem",
+    devDefault: 'test',
   }),
   DISCORD_TOKEN: str(),
+  CHANNEL_ID: str(),
+  INTERVAL: num({
+    devDefault: 1000 * 30,
+  }),
 });
