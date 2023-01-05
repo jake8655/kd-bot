@@ -61,10 +61,7 @@ export const getLeaderboard = async () => {
       name: z
         .string()
         .nullish()
-        .transform(name => {
-          if (!name) return 'Anonymous';
-          return name.trim();
-        }),
+        .transform(name => name?.trim() || 'Anonymous'),
     })
   );
 
