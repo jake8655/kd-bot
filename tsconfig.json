@@ -1,42 +1,40 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "compilerOptions": {
     "target": "ES2016",
-    "lib": [
-      "ESNext"
-    ],
-    "module": "CommonJS",
-    "allowJs": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
-    "strict": true,
+    "lib": ["ESNext"],
+    "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "ES2015",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "incremental": true,
     "noUncheckedIndexedAccess": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"],
+      "~env/*": ["./src/env/*"]
+    },
+    "importsNotUsedAsValues": "error",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "importsNotUsedAsValues": "error",
-    "removeComments": true,
-    "outDir": "dist",
-    "sourceMap": true
+    "allowUnusedLabels": false
   },
-  "include": [
-    "**/*.ts",
-    "**/*.cjs",
-    "**/*.mjs"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": [".eslintrc.cjs", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  "exclude": ["node_modules", "dist"]
 }
