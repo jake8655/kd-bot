@@ -1,0 +1,30 @@
+[
+  {
+    "identifier": "1char1:cb2b7a1b2d19069cfc66f8661734ab3e50f5b623",
+    "name": "devike",
+    "death": 92,
+    "headshots": 22,
+    "kill": 86
+  },
+  {
+    "identifier": "1char2:cb2b7a1b2d19069cfc66f8661734ab3e50f5b623",
+    "name": "Wolfex",
+    "death": 1,
+    "headshots": 2,
+    "kill": 4
+  },
+  {
+    "identifier": "1char3:cb2b7a1b2d19069cfc66f8661734ab3e50f5b623",
+    "name": "Jake",
+    "death": 27,
+    "headshots": 5,
+    "kill": 9
+  },
+  {
+    "identifier": "1char4:cb2b7a1b2d19069cfc66f8661734ab3e50f5b623",
+    "name": "Not User",
+    "death": 57,
+    "headshots": 1,
+    "kill": 4
+  }
+]

@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production node -r dotenv/config dist/index.js",
     "dev": "ts-node-dev -r dotenv/config --respawn src/index.ts",
     "build": "tsup src/index.ts --format cjs --dts",
-    "format": "prettier --write src/**/*.ts",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint --ext .ts src/"
   },
   "keywords": [],

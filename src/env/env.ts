@@ -1,22 +1,12 @@
 import { envsafe, num, str } from 'envsafe';
 
 export const env = envsafe({
+  JSON_FILE_PATH: str({
+    devDefault: './data.json',
+  }),
   NODE_ENV: str({
     devDefault: 'development',
     choices: ['development', 'test', 'production'],
-  }),
-  DATABASE_HOST: str({
-    devDefault: 'localhost',
-  }),
-  DATABASE_USER: str({
-    devDefault: 'root',
-  }),
-  DATABASE_PASSWORD: str({
-    allowEmpty: true,
-    devDefault: 'password',
-  }),
-  DATABASE_NAME: str({
-    devDefault: 'test',
   }),
   DISCORD_TOKEN: str(),
   CHANNEL_ID: str(),
