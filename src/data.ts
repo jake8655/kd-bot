@@ -5,15 +5,18 @@ import path from 'path';
 
 const TOP = 50;
 
-const fileSchema = z.array(
-  z.object({
-    identifier: z.string(),
-    name: z.string(),
-    deaths: z.number(),
-    headshots: z.number(),
-    kills: z.number(),
-  }),
-);
+const fileSchema = z.tuple([
+  z.array(
+    z.object({
+      identifier: z.string(),
+      name: z.string(),
+      deaths: z.number(),
+      headshots: z.number(),
+      kills: z.number(),
+    }),
+  ),
+  z.unknown(),
+]);
 
 const botSchema = z.object({
   id: z.string().nullish(),
@@ -33,13 +36,15 @@ export const readFile = async () => {
 export const getLeaderboard = async () => {
   const file = await readFile();
 
-  const data = file.sort((a, b) => b.kills / b.deaths - a.kills / a.deaths);
+  const data = file[0].sort((a, b) => b.kills / b.deaths - a.kills / a.deaths);
 
   const dataWithKd = data.map(player => ({
     ...player,
     ratio: player.kills / player.deaths,
   }));
-  return dataWithKd.slice(TOP);
+  dataWithKd.slice(0, TOP);
+
+  return dataWithKd;
 };
 
 export const getMessageId = async () => {
@@ -54,7 +59,7 @@ export const getMessageId = async () => {
 };
 
 export const setMessageId = async (id: string) => {
-  const file = await fs.readFile('bot.json', 'utf-8');
+  const file = await fs.readFile(path.resolve('./bot.json'), 'utf-8');
   try {
     const data = botSchema.parse(JSON.parse(file));
     const newData = { ...data, id };

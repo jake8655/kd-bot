@@ -2,7 +2,7 @@ import { envsafe, num, str } from 'envsafe';
 
 export const env = envsafe({
   JSON_FILE_PATH: str({
-    devDefault: './data.json',
+    devDefault: '/Users/jake/projects/fivem/bot/kd.json',
   }),
   NODE_ENV: str({
     devDefault: 'development',
