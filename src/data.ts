@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import fs from 'fs/promises';
-import { env } from './env/env';
+import { env } from '~env';
 import path from 'path';
 
 const fileSchema = z.tuple([

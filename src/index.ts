@@ -7,7 +7,7 @@ import {
   type Message,
 } from 'discord.js';
 import { getLeaderboard, getMessageId, setMessageId } from './data';
-import { env } from './env/env';
+import { env } from '~env';
 
 // Cleanup function
 const cleanup = (interval: NodeJS.Timer) => {
