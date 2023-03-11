@@ -3,8 +3,6 @@ import fs from 'fs/promises';
 import { env } from './env/env';
 import path from 'path';
 
-const TOP = 50;
-
 const fileSchema = z.tuple([
   z.array(
     z.object({
@@ -42,7 +40,7 @@ export const getLeaderboard = async () => {
     ...player,
     ratio: player.kills / player.deaths,
   }));
-  dataWithKd.slice(0, TOP);
+  dataWithKd.slice(0, env.TOP);
 
   return dataWithKd;
 };

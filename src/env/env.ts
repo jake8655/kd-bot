@@ -1,6 +1,9 @@
 import { envsafe, num, str } from 'envsafe';
 
 export const env = envsafe({
+  TOP: num({
+    default: 50,
+  }),
   JSON_FILE_PATH: str({
     devDefault: '/Users/jake/projects/fivem/bot/kd.json',
   }),
